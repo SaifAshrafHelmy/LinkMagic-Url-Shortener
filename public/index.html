@@ -4,16 +4,44 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com "> -->
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com "> -->
+
+
   <title>Saif Ashraf - Url Shortener</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 
-<body>
+<body >
+  <div class="background"></div>
 
   <header>
     <h1>Saif Ashraf - Short urls for your code</h1>
   </header>
 
+  <main id="app" >
+
+    <form @submit.prevent="createUrl()">
+      <label for="url">Url</label>
+      <input v-model="url" name="url" id="url">
+      <label for="slug">Slug</label>
+      <input v-model="slug" name="slug" id="slug">
+      <button type="submit">Create</button>
+    </form>
+
+
+    <!-- whatever the api gives back, show it below the form -->
+    <pre v-if="created">
+      {{ JSON.stringify(created, null, 2) }}
+    </pre>
+
+  </main>
+
 </body>
 
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.cjs.js" integrity="sha512-Om0T2d9tl4H2ShSsEkWjJeQOlXGJg4OZvXKZw075refp2RNZ1avQDbqd6WhwGbWhqpcn2oPmExCEa/lSLzZaJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+<script src="https://unpkg.com/vue@3.3.4/dist/vue.global.js"></script>
+<!-- <script src="/path/to/vue.js"></script> -->
+
+<script src="app.js"></script>
 </html>
