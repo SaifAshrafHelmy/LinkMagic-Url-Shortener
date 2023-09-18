@@ -42,6 +42,19 @@ const app = Vue.createApp({
 app.mount('#app');
 
 
+function copyToClipboard(theButton) {
+  // Get the text field
+  let copyText = document.getElementById("theLink");
+
+  // Select the text field
+
+   // Copy the text inside the text field
+  navigator.clipboard.writeText(copyText.href);
+  
+  theButton.innerHTML ="Link Copied!"
+}
+
+
 // const vue = Vue.createApp({
 //   data(){
 //     return {

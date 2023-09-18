@@ -2,45 +2,61 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com "> -->
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com; script-src-elem 'self' 'unsafe-inline' 'unsafe-eval' http://cdnjs.cloudflare.com "> -->
 
-
   <title>Saif Ashraf - Url Shortener</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital@1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
-<body >
+<body>
   <div class="background"></div>
 
   <header>
-    <h1>Saif Ashraf - Short urls for your code</h1>
+    <h1 class="logo">LinkMagic</h1>
+    <h1 class="phrase">Make your URLs short and beautiful!</h1>
   </header>
 
-  <main id="app" >
+  <main id="app">
+    <form @submit.prevent="createUrl()" class="formArea">
 
-    <form @submit.prevent="createUrl()">
-      <label for="url">Url</label>
-      <input v-model="url" name="url" id="url" type="url">
-      <label for="slug">Slug</label>
-      <input v-model="slug" name="slug" id="slug">
-      <button type="submit">Create</button>
+      <div class="field">
+        <div class="labelContainer">
+          <label for="url">Url</label>
+        </div>
+        <input v-model="url" name="url" id="url" type="url" placeholder="https://www.google.com" />
+      </div>
+
+      <div class="field">
+        <div class="labelContainer">
+          <label for="slug">Slug <span>(optional)</span></label>
+        </div>
+        <input v-model="slug" name="slug" id="slug" />
+      </div>
+      <button type="submit">Shorten URL</button>
     </form>
 
-
     <!-- whatever the api gives back, show it below the form -->
-    <pre v-if="created">
-        <a v-bind:href="newLink" target="_blank"> Go to page</a>
+    <div class="result"  v-if="created">
+      <div class="field fieldShowLink">
+        <div class="labelContainer">
+          <label for="url">Short Link</label>
+        </div>
+        <div class="linkContainer">
+          <a v-bind:href="newLink" target="_blank" id="theLink"> {{newLink}}</a>
+        </div>
+      </div>
 
-      <p>{{ created }}</p>
-      <p></p>
-      <p></p>
-    </pre>
 
+
+      <button onclick="copyToClipboard(this)">Copy To Clipboard</button>
+    </div>
   </main>
-
 </body>
 
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.cjs.js" integrity="sha512-Om0T2d9tl4H2ShSsEkWjJeQOlXGJg4OZvXKZw075refp2RNZ1avQDbqd6WhwGbWhqpcn2oPmExCEa/lSLzZaJw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
@@ -48,4 +64,5 @@
 <!-- <script src="/path/to/vue.js"></script> -->
 
 <script src="app.js"></script>
+
 </html>
