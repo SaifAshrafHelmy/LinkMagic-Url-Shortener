@@ -17,6 +17,8 @@ urls.createIndex({ slug: 1 }, { unique: true })
 const app = express();
 
 
+/* @TODO Handle errors and entering no-slugs and repeated slugs  */
+
 const allowedOrigins = ['https://unpkg.com/browse/vue@3.3.4/dist/vue.global.js'];
 app.use(cors());
 
