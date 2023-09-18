@@ -23,7 +23,7 @@
 
     <form @submit.prevent="createUrl()">
       <label for="url">Url</label>
-      <input v-model="url" name="url" id="url">
+      <input v-model="url" name="url" id="url" type="url">
       <label for="slug">Slug</label>
       <input v-model="slug" name="slug" id="slug">
       <button type="submit">Create</button>
@@ -32,7 +32,11 @@
 
     <!-- whatever the api gives back, show it below the form -->
     <pre v-if="created">
-      {{ JSON.stringify(created, null, 2) }}
+        <a v-bind:href="newLink" target="_blank"> Go to page</a>
+
+      <p>{{ created }}</p>
+      <p></p>
+      <p></p>
     </pre>
 
   </main>

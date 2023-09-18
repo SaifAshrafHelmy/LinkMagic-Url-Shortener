@@ -3,7 +3,8 @@ const app = Vue.createApp({
     return {
       url: '',
       slug: '',
-      created: null
+      created: null,
+      newLink:null
     };
   },
   methods: {
@@ -19,7 +20,20 @@ const app = Vue.createApp({
           slug:this.slug
         })
       })
-      this.created = await response.json()
+      let beforeCreated = await response.json();
+      console.log({beforeCreated})
+      console.log(window.location.href);
+      newLink= window.location.href + beforeCreated.slug
+
+  
+      // console.log("num 2", {beforeCreated})
+
+      // console.log("test")
+      // console.log({beforeCreated})
+      this.created = beforeCreated;
+      this.newLink = newLink;
+      // this.created = JSON.stringify(this.created, null, 2)
+      
     }
   }
 });

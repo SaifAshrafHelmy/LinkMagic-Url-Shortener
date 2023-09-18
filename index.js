@@ -37,6 +37,8 @@ app.use(express.static('public'))
 app.get("/:slug", async (req, res, next) => {
   // TODO: redirect to url
   const { slug } = req.params;
+  console.log("the below is the slug");
+  console.log({slug})
 
 
 
@@ -44,6 +46,7 @@ app.get("/:slug", async (req, res, next) => {
   const record = await urls.findOne({ slug })
   if (record) {
     const url = record.url
+    console.log({url});
     res.redirect(url)
   }
   else{
@@ -88,9 +91,11 @@ app.post("/url", async (req, res, next) => {
       slug
     }
     const created = await urls.insert(newUrl)
+    console.log({created})
     res.json(created)
     // res.json({ slug, url })
   } catch (error) {
+    console.log("POST FAILED!!!!");
     if (error.message.startsWith('E11000')) {
       error.message = 'Slug already in use. 🍔'
     }
