@@ -15,7 +15,7 @@ body {
   flex-direction: column;
 
 
-  margin: 2rem;
+  margin: 1rem;
   margin-top: 1rem;
   /* background: silver; */
   background-image: url("1407.jpg");
@@ -71,7 +71,6 @@ header h1.phrase{
   flex-direction: column;
 
 
-  background-color: white;
   width: 90%;
   max-width: 700px;
 
@@ -215,11 +214,44 @@ background-color: white
   text-decoration: none;
   color: #002aff;
   word-break: break-all;
-  font-size: 16px;
+  font-size: 18px;
+  font-family: fantasy, 'Inclusive Sans', sans-serif;
 
 
   
 }
+
+
+.animate-character{
+  text-transform: uppercase;
+  background-image: linear-gradient(
+   -225deg,
+   #ab7d7d 0%,
+   #7d5656 25%,
+   #6b6b93 75%,
+   #000000 100%
+);
+ background-size: auto auto;
+ background-clip: border-box;
+ background-size: 200% auto;
+ color: #fff;
+ background-clip: text;
+ text-fill-color: transparent;
+ -webkit-background-clip: text;
+ -webkit-text-fill-color: transparent;
+ animation: textclip 2s linear infinite;
+ display: inline-block;
+     font-size: 190px;
+}
+
+@keyframes textclip {
+ to {
+   background-position: 200% center;
+ }
+}
+
+
+
 .linkContainer a:hover{
   cursor: pointer;
   text-decoration: underline;
@@ -235,7 +267,7 @@ a:visited {
   background-color: rgba(51, 51, 51, 0.25);
   border-radius: 8px;
   border-width: 0;
-  color: #333333;
+  color: black;
   cursor: pointer;
   display: inline-block;
   font-family: "Haas Grot Text R Web", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -283,6 +315,14 @@ a:visited {
 
   .linkContainer a{
     font-size: 12px
+  }
+
+  .formArea{
+    width: 100%;
+
+  }
+  .field input {
+    width: 90%;
   }
 }
 
