@@ -54,11 +54,15 @@
           
         </div>
       </div>
-
-
-
       <button onclick="copyToClipboard(this)">Copy To Clipboard</button>
     </div>
+
+    <div class="result error" v-if="errorMsg">
+      <p>{{errorMsg}}</p>
+    </div>
+
+
+
   </main>
 </body>
 

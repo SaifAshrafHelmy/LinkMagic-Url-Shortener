@@ -29,19 +29,19 @@ app.use(express.json())
 app.use(express.static('public'))
 
 
+const schema = yup.object().shape({
+  slug: yup.string().trim().matches(/[\w\-]/i),
+  url: yup.string().trim().url().required()
+})
 
 
-// app.get("/url/:id", (req, res) => {
-//   // TODO: get a short url by id
 
-// })
 
 app.get("/:slug", async (req, res, next) => {
   // TODO: redirect to url
   const { slug } = req.params;
   console.log("the below is the slug");
   console.log({slug})
-
 
 
   try {
@@ -52,13 +52,14 @@ app.get("/:slug", async (req, res, next) => {
     res.redirect(url)
   }
   else{
-    res.redirect(`/?error=${slug} not found`)
+    // res.redirect(`/?error=${slug} not found`)
+    res.redirect('/?error=Requested-URL-was-not-found')
+    // return next({"message":`Sorry, this url was not found`})
 
   }
 
 } catch (error) {
-  // next({ "message": " Short url not found. ☁" })
-  res.redirect(`/?error=Link not found`)
+  res.redirect(`/?error=Something-went-wrong`)
 
 }
 
@@ -67,26 +68,25 @@ app.get("/:slug", async (req, res, next) => {
 
 })
 
-const schema = yup.object().shape({
-  slug: yup.string().trim().matches(/[\w\-]/i),
-  url: yup.string().trim().url().required()
-})
+
 
 app.post("/url", async (req, res, next) => {
   // TODO: create a short url
   let { slug, url } = req.body;
   try {
-    await schema.validate({ slug, url })
     if (!slug) {
       slug = nanoid(5)
+    }else if(slug){
+      const record = await urls.findOne({ slug })
+      if (record) {
+        return next({ "message": " Sorry, Slug is already used. ☁" })
+      }
+    
     }
-    // else{
-    //   const existing = await urls.findOne({slug})
-    //   if(existing){
-    //     throw new Error('Slug in use. 🍔')
-    //   }
-    // }
     slug = slug.toLowerCase()
+
+    await schema.validate({ slug, url })
+
 
     const newUrl = {
       url,
@@ -115,7 +115,7 @@ app.use((error, req, res, next) => {
   }
   res.json(
     {
-      message: error.message,
+      message: process.env.NODE_ENV === 'production'? "Sorry, We couldn't process your request." : error.message,
       stack: process.env.NODE_ENV === 'production' ? '🥞' : error.stack
     }
   )
