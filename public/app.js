@@ -23,7 +23,18 @@ const app = Vue.createApp({
       let beforeCreated = await response.json();
       console.log({beforeCreated})
       console.log(window.location.href);
-      newLink= window.location.href + beforeCreated.slug
+      let curr = window.location.href;
+      let shortCurr;
+      if(curr.startsWith('https')){
+        shortCurr = curr.slice(8,-1)
+      }
+      else if(curr.startsWith('http')){
+        shortCurr = curr.slice(7,-1)
+      }
+      else{
+        shortCurr = curr;
+      }
+      newLink= shortCurr + beforeCreated.slug
 
   
       // console.log("num 2", {beforeCreated})
