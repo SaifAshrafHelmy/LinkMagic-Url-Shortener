@@ -26,10 +26,10 @@ const app = Vue.createApp({
       let curr = window.location.href;
       let shortCurr;
       if(curr.startsWith('https')){
-        shortCurr = curr.slice(8,-1)
+        shortCurr = curr.slice(8,)
       }
       else if(curr.startsWith('http')){
-        shortCurr = curr.slice(7,-1)
+        shortCurr = curr.slice(7,)
       }
       else{
         shortCurr = curr;
