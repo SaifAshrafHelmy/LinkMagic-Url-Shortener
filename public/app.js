@@ -55,7 +55,7 @@ const app = Vue.createApp({
     // console.log({errorMessage})
 
     
-    if(errorMessage.length>=0){
+    if(errorMessage.get('error')){
       console.log({errorMessage});
       this.errorMsg = errorMessage.get('error').replaceAll("-", " ");
       console.log(errorMessage); // Log the error response
