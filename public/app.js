@@ -33,6 +33,9 @@ const app = Vue.createApp({
           const errorResponse = await response.json(); // Parse the error response
           if(errorResponse.message){
             this.errorMsg = errorResponse.message;
+
+            this.created = null;
+            this.newLink = null;
             console.log(errorResponse.message); // Log the error response
           }
         }
